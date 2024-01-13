@@ -13,8 +13,38 @@ import AppsIcon from "@mui/icons-material/Apps";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Avatar } from "@mui/material";
 import camera from "../assets/camera.png";
+import { useNavigate } from "react-router-dom";
+
+import { UserAuth } from '../context/AuthContext';
+
+// import { signOut } from "firebase/auth";
+// import { auth } from "../firebaseConfig";
 
 function Navbar() {
+  const history = useNavigate();
+  const { logout } = UserAuth();
+
+  // const handleSignOut = (e) => {
+  //   e.preventDefault();
+  //   signOut(auth).then(() => {
+  //     // Sign-out successful.
+  //     alert("You have been Logged Out!")
+  //     history('/')
+  //   }).catch((error) => {
+  //     console.log(error.message);
+  //   });
+  // }
+
+  const handleSignOut = async () => {
+    try {
+      await logout();
+      history('/');
+      console.log('You are logged out')
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   return (
     <>
       <nav className="flex items-center justify-evenly bg-white py-[10px] md:py-0 md:pt-[5px]">
@@ -64,7 +94,7 @@ function Navbar() {
                 title="Notifications"
               />
 
-              <div className="flex items-center flex-col text-sm text-slate-500 lg:text-base hover:text-black">
+              <div onClick={handleSignOut} className="flex items-center flex-col text-sm text-slate-500 lg:text-base hover:text-black">
                 <div>
                   <Avatar src={camera} />
                 </div>
