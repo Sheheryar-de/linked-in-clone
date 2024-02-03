@@ -15,7 +15,7 @@ import { Avatar } from "@mui/material";
 import camera from "../assets/camera.png";
 import { useNavigate } from "react-router-dom";
 
-import { UserAuth } from '../context/AuthContext';
+import { UserAuth } from "../context/AuthContext";
 
 // import { signOut } from "firebase/auth";
 // import { auth } from "../firebaseConfig";
@@ -38,8 +38,8 @@ function Navbar() {
   const handleSignOut = async () => {
     try {
       await logout();
-      history('/');
-      console.log('You are logged out')
+      history("/");
+      console.log("You are logged out");
     } catch (e) {
       console.log(e.message);
     }
@@ -49,71 +49,74 @@ function Navbar() {
     <>
       <nav className="flex items-center justify-evenly bg-white py-[10px] md:py-0 md:pt-[5px]">
         {/* left side of Navbar */}
-       
-          <div className="mobile flex items-center justify-evenly w-[100%] md:justify-start md:w-[40%] lg:w-[40%] xl:w-[50%]">
-            <div className="md:ml-[8px]">
-              <div className="md:hidden">
+
+        <div className="mobile flex items-center justify-evenly w-[100%] md:justify-start md:w-[40%] lg:w-[40%] xl:w-[50%]">
+          <div className="md:ml-[8px]">
+            <div className="md:hidden">
+              <Avatar src={camera} />
+            </div>
+            <div className="flex items-center">
+              <div className="hidden xl:block">
+                <h1 className="text-3xl font-bold text-sky-700">Linked</h1>
+              </div>
+              <img
+                src={icon}
+                alt="Linkedin logo"
+                className="h-[42px] hidden md:block"
+              />
+            </div>
+          </div>
+
+          <div className="flex bg-slate-200 py-[7px] px-[10px] rounded text-slate-400 sm:ml-[5px]	">
+            <div>
+              <SearchOutlinedIcon />
+            </div>
+            <input
+              type="text"
+              placeholder="Search"
+              className="bg-slate-200 outline-0 w-[250px] md:w-[140px]	md:pl-[5px] lg:w-[250px]"
+            />
+          </div>
+
+          <div className="text-slate-400 md:hidden">
+            <ChatRoundedIcon />
+          </div>
+        </div>
+
+        {/* Right side of Navbar */}
+        <div className="Options hidden hover:cursor-pointer md:block md:w-[60%] lg:w-[50%] xl:w-[40%]">
+          <div className="flex items-center justify-between ">
+            <NotificationNavbar Icon={<HouseIcon />} title="Home" />
+            <NotificationNavbar Icon={<PeopleAltIcon />} title="My Network" />
+            <NotificationNavbar Icon={<AddBoxIcon />} title="Post" />
+            <NotificationNavbar
+              Icon={<NotificationsIcon />}
+              title="Notifications"
+            />
+
+            <div
+              onClick={handleSignOut}
+              className="flex items-center flex-col text-sm text-slate-500 lg:text-base hover:text-black"
+            >
+              <div>
                 <Avatar src={camera} />
               </div>
-              <div className="flex items-center">
-                <div className="hidden xl:block">
-                  <h1 className="text-3xl font-bold text-sky-700">Linked</h1>
-                </div>
-                <img
-                  src={icon}
-                  alt="Linkedin logo"
-                  className="h-[42px] hidden md:block"
-                />
-              </div>
+              <a href="">
+                Me <ArrowDropDownIcon />
+              </a>
             </div>
 
-            <div className="flex bg-slate-200 py-[7px] px-[10px] rounded text-slate-400 sm:ml-[5px]	">
-              <div>
-                <SearchOutlinedIcon />
-              </div>
-              <input
-                type="text"
-                placeholder="Search"
-                className="bg-slate-200 outline-0 w-[250px] md:w-[140px]	md:pl-[5px] lg:w-[250px]"
-              />
-            </div>
+            {/* vertical line */}
+            <div className="inline-block h-[50px] min-h-[10px] w-0.5 self-stretch bg-slate-500 opacity-100 "></div>
 
-            <div className="text-slate-400 md:hidden">
-              <ChatRoundedIcon />
+            <div className="flex items-center flex-col text-slate-500 text-sm lg:text-base hover:text-black">
+              <AppsIcon />
+              <a href="">
+                Work <ArrowDropDownIcon />
+              </a>
             </div>
           </div>
-
-          {/* Right side of Navbar */}
-          <div className="Options hidden hover:cursor-pointer md:block md:w-[60%] lg:w-[50%] xl:w-[40%]">
-            <div className="flex items-center justify-between ">
-              <NotificationNavbar Icon={<HouseIcon />} title="Home" />
-              <NotificationNavbar Icon={<PeopleAltIcon />} title="My Network" />
-              <NotificationNavbar Icon={<AddBoxIcon />} title="Post" />
-              <NotificationNavbar
-                Icon={<NotificationsIcon />}
-                title="Notifications"
-              />
-
-              <div onClick={handleSignOut} className="flex items-center flex-col text-sm text-slate-500 lg:text-base hover:text-black">
-                <div>
-                  <Avatar src={camera} />
-                </div>
-                <a href="">
-                  Me <ArrowDropDownIcon />
-                </a>
-              </div>
-
-              {/* vertical line */}
-              <div className="inline-block h-[50px] min-h-[10px] w-0.5 self-stretch bg-slate-500 opacity-100 "></div>
-
-              <div className="flex items-center flex-col text-slate-500 text-sm lg:text-base hover:text-black">
-                <AppsIcon />
-                <a href="">
-                  Work <ArrowDropDownIcon />
-                </a>
-              </div>
-            </div>
-          </div>
+        </div>
       </nav>
 
       {/* mobile footer navbar */}
