@@ -1,4 +1,3 @@
-import React from "react";
 import BottomNav from "./BottomNav";
 import NotificationNavbar from "./NotificationNavBar";
 import icon from "../assets/icon.png";
@@ -17,23 +16,9 @@ import { useNavigate } from "react-router-dom";
 
 import { UserAuth } from "../context/AuthContext";
 
-// import { signOut } from "firebase/auth";
-// import { auth } from "../firebaseConfig";
-
 function Navbar() {
   const history = useNavigate();
   const { logout } = UserAuth();
-
-  // const handleSignOut = (e) => {
-  //   e.preventDefault();
-  //   signOut(auth).then(() => {
-  //     // Sign-out successful.
-  //     alert("You have been Logged Out!")
-  //     history('/')
-  //   }).catch((error) => {
-  //     console.log(error.message);
-  //   });
-  // }
 
   const handleSignOut = async () => {
     try {

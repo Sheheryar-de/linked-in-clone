@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import InputOptions from "./InputOptions";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import ShortcutRoundedIcon from "@mui/icons-material/ShortcutRounded";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import PropTypes from "prop-types";
 
 function Post({
   avatar,
@@ -11,12 +12,11 @@ function Post({
   skill,
   time,
   status,
-  desc,
+  description,
   image,
   imgDesc,
   link,
 }) {
-  
   const [count, setCount] = useState(0);
   const handleChange = () => {
     setCount(count + 1);
@@ -51,7 +51,7 @@ function Post({
 
         {/* image imageDescription and imageURL */}
         <div className="mt-[15px] leading-5 	">
-          <p className="font-medium text-sm lg:text-base">{desc}</p>
+          <p className="font-medium text-sm lg:text-base">{description}</p>
           <div className="w-[100%] object-cover mt-[15px] bg-slate-100 p-[10px] rounded">
             <img src={image} alt="" />
             <p className="font-bold mt-[10px]">{imgDesc}</p>
@@ -62,7 +62,9 @@ function Post({
         </div>
 
         {/* input buttons like comment and  etc */}
-        <p className="pl-[10px] text-xs font-bold my-[10px] text-gray-500">{count} Likes</p>
+        <p className="pl-[10px] text-xs font-bold my-[10px] text-gray-500">
+          {count} Likes
+        </p>
         <div className="flex items-center justify-evenly mt-[3px] py-[10px] bg-slate-50 mb-[5px]">
           <InputOptions
             Icon={<ThumbUpAltIcon />}
@@ -78,3 +80,15 @@ function Post({
   );
 }
 export default Post;
+
+Post.propTypes = {
+  avatar: PropTypes.string,
+  name: PropTypes.string,
+  skill: PropTypes.string,
+  time: PropTypes.string,
+  status: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  imgDesc: PropTypes.string,
+  link: PropTypes.string,
+};
