@@ -7,14 +7,13 @@ const ProtectedRoute = ({ children }) => {
   const { user, logout } = UserAuth();
 
   useEffect(() => {
-    // Log out the user if they're not authenticated
     if (!user) {
-      logout(); // Call the logout function
+      logout();
     }
   }, [user, logout]);
 
   if (!user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/signin" />;
   }
   return children;
 };

@@ -1,38 +1,60 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
-import Feed from "./components/Feed";
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
+
+import Signup from "./pages/Signup";
+import LandingPage from "./pages/LandingPage";
+import Signin from "./pages/Signin";
+import Feed from "./components/Feed";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+import AuthNavbar from "./components/AuthNavbar";
+import DashboardNavbar from "./components/DashboardNavbar";
+import Footer from "./components/Footer";
+
+function AppLayout() {
+  const location = useLocation();
+
+  const authPaths = ["/signin", "/signup"];
+  const landingPath = "/";
+
+  const isAuthPage = authPaths.includes(location.pathname);
+  const isLandingPage = location.pathname === landingPath;
+
+  return (
+    <div className="mx-[auto] pt-[10px] max-w-7xl">
+      {isLandingPage ? (
+        <AuthNavbar isTrue={true} />
+      ) : isAuthPage ? (
+        <AuthNavbar isTrue={false} />
+      ) : (
+        <DashboardNavbar />
+      )}
+      <Routes>
+        <Route exact path="/" element={<LandingPage />} />
+        <Route exact path="/signin" element={<Signin />} />
+        <Route exact path="/signup" element={<Signup />} />
+        <Route
+          exact
+          path="/feed"
+          element={
+            <ProtectedRoute>
+              <Feed />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+      {isAuthPage || isLandingPage ? <Footer /> : null}
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="bg-gray-100 h-[100vh]">
-      <div className="">
-        <div className="bg-gray-100 mx-[auto] pt-[10px] w-[95%] md:w-[98%] lg:w-[90%] xl:w-[90%] 2xl:w-[80%]">
-          <AuthContextProvider>
-            <BrowserRouter>
-              <Navbar />
-              <Routes>
-                <Route exact path="/" element={<Signin />} />
-                <Route exact path="/signup" element={<Signup />} />
-                <Route
-                  exact
-                  path="/feed"
-                  element={
-                    <ProtectedRoute>
-                      <Feed />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </BrowserRouter>
-          </AuthContextProvider>
-        </div>
-      </div>
-    </div>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <AppLayout />
+      </BrowserRouter>
+    </AuthContextProvider>
   );
 }
 
