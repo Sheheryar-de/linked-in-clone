@@ -21,29 +21,41 @@ function AppLayout() {
   const isLandingPage = location.pathname === landingPath;
 
   return (
-    <div className="mx-[auto] pt-[10px] max-w-7xl">
-      {isLandingPage ? (
-        <AuthNavbar isTrue={true} />
-      ) : isAuthPage ? (
-        <AuthNavbar isTrue={false} />
-      ) : (
-        <DashboardNavbar />
+    <div className="min-h-screen flex flex-col">
+      {/* Navbar */}
+      <div className="mx-auto pt-[10px] max-w-7xl w-full">
+        {isLandingPage ? (
+          <AuthNavbar isTrue={true} />
+        ) : isAuthPage ? (
+          <AuthNavbar isTrue={false} />
+        ) : (
+          <DashboardNavbar />
+        )}
+      </div>
+
+      {/* Main Content */}
+      <main className="flex-grow mx-auto max-w-7xl w-full">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/feed"
+            element={
+              <ProtectedRoute>
+                <Feed />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </main>
+
+      {/* Footer */}
+      {(isAuthPage || isLandingPage) && (
+        <div className="mx-auto max-w-7xl w-full">
+          <Footer />
+        </div>
       )}
-      <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/signin" element={<Signin />} />
-        <Route exact path="/signup" element={<Signup />} />
-        <Route
-          exact
-          path="/feed"
-          element={
-            <ProtectedRoute>
-              <Feed />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-      {isAuthPage || isLandingPage ? <Footer /> : null}
     </div>
   );
 }

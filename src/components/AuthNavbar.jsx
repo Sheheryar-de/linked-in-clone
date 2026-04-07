@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import icon from "../assets/icon.png";
 
 function AuthNavbar({ isTrue = false }) {
@@ -11,13 +12,19 @@ function AuthNavbar({ isTrue = false }) {
         </div>
       </div>
       {isTrue && (
-        <div className="text-sm text-gray-600 mt-1">
-          <button className="text-sky-900 border border-sky-900 text-lg px-7 py-3 font-semibold hover:bg-sky-100 rounded-full mr-2">
+        <div className="text-sm text-gray-600 mt-3">
+          <Link
+            to={"/signin"}
+            className="text-sky-900 border border-sky-900 text-lg px-7 py-3 font-semibold hover:bg-sky-100 rounded-full mr-2"
+          >
             Sign in
-          </button>
-          <button className="bg-sky-600 text-white px-7 py-3 text-lg font-semibold hover:bg-sky-900 rounded-full">
+          </Link>
+          <Link
+            to={"/signup"}
+            className="bg-sky-600 text-white px-7 py-3 text-lg font-semibold hover:bg-sky-900 rounded-full"
+          >
             Join now
-          </button>
+          </Link>
         </div>
       )}
     </div>

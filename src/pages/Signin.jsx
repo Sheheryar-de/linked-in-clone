@@ -37,7 +37,7 @@ export default function Signin() {
   };
 
   return (
-    <div className="w-[100%] flex items-center justify-center">
+    <div className="w-[100%] flex items-center justify-center ">
       <div>
         <div className="block w-[330px] py-4 px-6 rounded-lg bg-white text-black shadow-lg shadow-black/20">
           <h1 className="text-3xl font-semibold text-black mb-[25px]">

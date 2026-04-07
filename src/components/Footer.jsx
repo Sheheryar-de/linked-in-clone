@@ -1,4 +1,3 @@
-import React from "react";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 
